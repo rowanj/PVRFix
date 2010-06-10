@@ -1,8 +1,4 @@
-#import <iostream>
-#import <ApplicationServices/ApplicationServices.h>
 #import "Image.h"
-
-using namespace std;
 
 int main (int argc, const char * argv[]) {
 
@@ -16,8 +12,10 @@ int main (int argc, const char * argv[]) {
 	if (argc != 2) {
 		cout << "Usage:" << endl;
 		cout << "\t" << argv[0] << " \"filename\"" << endl;
+		return 1;
 	}
 	
+	cout << "Processing file: \"" << argv[1] << "\"" << endl;
 	Image oImg(argv[1]);
 
     return 0;

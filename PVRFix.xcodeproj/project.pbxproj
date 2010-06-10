@@ -193,7 +193,10 @@
 				GCC_PREFIX_HEADER = PchApp.h;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(HOME)/include";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/lib";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lboost_program_options";
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 			};
@@ -209,6 +212,9 @@
 				GCC_PREFIX_HEADER = PchApp.h;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(HOME)/include";
+				LIBRARY_SEARCH_PATHS = "$(HOME)/lib";
+				OTHER_LDFLAGS = "-lboost_program_options";
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
 			};

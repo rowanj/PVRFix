@@ -9,17 +9,23 @@
 
 #include "Image.h"
 
-Image::Image(ImageData* pData) : // take ownership of pData
+#import <stdexcept>
+
+Image::Image(ImageData* pData, CGColorSpaceRef colorSpace) : // take ownership of pData
 	m_pImageData(pData),
-	m_colorSpace(NULL)
+	m_colorSpace(colorSpace)
 {
+	CGColorSpaceRetain(colorSpace);
 }
 
-Image::Image(const string& strFilename) :
+Image::Image(const string& strFilename) throw (ImageOpenFailure) :
 	m_pImageData(NULL),
 	m_colorSpace(NULL)
 {
 	CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename(strFilename.c_str());
+	if (dataProvider == NULL) {
+		throw ImageOpenFailure();
+	}
 	
 	CGImageRef refSourceImage = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
 
@@ -60,4 +66,25 @@ const ImageData& Image::Data() const
 const CGColorSpaceRef Image::ColorSpace() const
 {
 	return m_colorSpace;
+}
+
+void Image::Save(const string& strFilename) const throw (ImageSaveFailure)
+{
+		// Create the CGImage to save
+	CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, m_pImageData->GetBufferPtr(), m_pImageData->GetBufferSize(), NULL);
+	CGImageRef image = CGImageCreate(m_pImageData->Width(), m_pImageData->Height(), 8, 32, m_pImageData->Width() * 4, ColorSpace(), kCGImageAlphaPremultipliedLast, dataProvider, NULL, true, kCGRenderingIntentDefault);
+	CGDataProviderRelease(dataProvider);
+	
+		// Find the appropriate URL to export to
+	CFStringRef cstrFilename = CFStringCreateWithCString(NULL, strFilename.c_str(), CFStringGetSystemEncoding());
+	CFURLRef destinationURL = CFURLCreateWithString(NULL, cstrFilename, NULL);
+	CFRelease(cstrFilename);
+	
+		// Export the CGImage
+	CGImageDestinationRef exportDestination = CGImageDestinationCreateWithURL(destinationURL, kUTTypePNG, 1, NULL);
+	CGImageDestinationAddImage(exportDestination, image, NULL);
+	CGImageDestinationFinalize(exportDestination);
+	
+	CFRelease(destinationURL);
+	CGImageRelease(image);
 }

@@ -34,26 +34,7 @@ Image Dot3Extend::Process(const Image& oSource) const
 		}
 	}
 	
-
-	// Random copy-pasta to save the output
-	CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, output->GetBufferPtr(), output->GetBufferSize(), NULL);
-	CGImageRef image = CGImageCreate(output->Width(), output->Height(), 8, 32, output->Width() * 4, oSource.ColorSpace(), kCGImageAlphaPremultipliedLast, dataProvider, NULL, true, kCGRenderingIntentDefault);
-	CGDataProviderRelease(dataProvider);
-	
-	FSRef usersDesktop;
-	FSFindFolder(kUserDomain, kDesktopFolderType, false, &usersDesktop);
-	CFURLRef desktopURL = CFURLCreateFromFSRef(NULL, &usersDesktop);
-	CFURLRef destinationURL = CFURLCreateWithFileSystemPathRelativeToBase(NULL, CFSTR("fixed.png"), kCFURLPOSIXPathStyle, false, desktopURL);
-	CFRelease(desktopURL);
-	
-	CGImageDestinationRef exportDestination = CGImageDestinationCreateWithURL(destinationURL, kUTTypePNG, 1, NULL);
-	CGImageDestinationAddImage(exportDestination, image, NULL);
-	CGImageDestinationFinalize(exportDestination);
-	
-	CFRelease(destinationURL);
-	CGImageRelease(image);
-	
-	return Image(output);
+	return Image(output, oSource.ColorSpace());
 }	
 
 ImagePixel Dot3Extend::CalculateOutput(const Image& oSource, const int x, const int y) const

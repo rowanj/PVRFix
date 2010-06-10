@@ -11,11 +11,29 @@
 
 #import "ImageData.h"
 
+class ImageException : public std::runtime_error
+{
+protected:
+	ImageException(const string& strDescription) : std::runtime_error(strDescription) {}	
+};
+
+class ImageOpenFailure : public ImageException
+{
+public:
+	ImageOpenFailure() : ImageException("Could not open the image file.") {}
+};
+
+class ImageSaveFailure : public ImageException
+{
+public:
+	ImageSaveFailure() : ImageException("Could not save the image file.") {}
+};
+
 class Image
 {
 public:
-	Image(ImageData* pData); // takes ownership of pData
-	Image(const string& strFilename);
+	Image(ImageData* pData, CGColorSpaceRef colorSpace); // takes ownership of pData
+	Image(const string& strFilename) throw (ImageOpenFailure);
 	virtual ~Image();
 	
 	ImageData& Data();
@@ -23,6 +41,7 @@ public:
 	
 	const CGColorSpaceRef ColorSpace() const;
 	
+	void Save(const string& strFilename) const throw (ImageSaveFailure);
 
 private:
 	CGColorSpaceRef m_colorSpace;

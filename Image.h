@@ -9,22 +9,27 @@
 
 #import <ApplicationServices/ApplicationServices.h>
 
+#import "ImageData.h"
+
 class Image
 {
 public:
-	typedef unsigned char byte;
 	
 	Image(const string& strFilename);
 	virtual ~Image();
 	
-	void Process();
+	void Process() const;
 
 private:
+	ImagePixel CalculateOutput(const int x, const int y) const;
+	list<pair<ImagePixel, float> > FindClosest(const int x, const int y) const;
+	
 	string m_strFilename;
 	CGImageRef m_refSourceImage;
+	CGColorSpaceRef m_colorSpace;
 
 	int m_width;
 	int m_height;
 
-	byte* m_pImageData;
+	ImageData* m_pImageData;
 };

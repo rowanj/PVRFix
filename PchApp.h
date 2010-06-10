@@ -9,6 +9,8 @@
 
 #import <iostream>
 #import <string>
+#import <list>
+#import <utility>
 #import <Foundation/Foundation.h>
 #import <ApplicationServices/ApplicationServices.h>
 

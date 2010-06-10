@@ -17,6 +17,7 @@ int main (int argc, const char * argv[]) {
 	
 	cout << "Processing file: \"" << argv[1] << "\"" << endl;
 	Image oImg(argv[1]);
+	oImg.Process();
 
     return 0;
 }

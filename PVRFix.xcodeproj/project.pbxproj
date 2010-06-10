@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4A68171B11C07D520057F54F /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A68171A11C07D520057F54F /* ApplicationServices.framework */; };
 		4A68173211C07EF20057F54F /* Image.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68173111C07EF20057F54F /* Image.mm */; };
+		4A68178D11C094100057F54F /* ImagePixel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68178C11C094100057F54F /* ImagePixel.mm */; };
+		4A68179511C095040057F54F /* ImageData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68179411C095040057F54F /* ImageData.mm */; };
 		8DD76FAC0486AB0100D96B5E /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.mm */; settings = {ATTRIBUTES = (); }; };
 		8DD76FB00486AB0100D96B5E /* PVRFix.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A0FF2C0290799A04C91782 /* PVRFix.1 */; };
 /* End PBXBuildFile section */
@@ -32,6 +34,10 @@
 		4A68173011C07EF20057F54F /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		4A68173111C07EF20057F54F /* Image.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Image.mm; sourceTree = "<group>"; };
 		4A68173411C081560057F54F /* PchApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PchApp.h; sourceTree = "<group>"; };
+		4A68178B11C094100057F54F /* ImagePixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePixel.h; sourceTree = "<group>"; };
+		4A68178C11C094100057F54F /* ImagePixel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImagePixel.mm; sourceTree = "<group>"; };
+		4A68179311C095040057F54F /* ImageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageData.h; sourceTree = "<group>"; };
+		4A68179411C095040057F54F /* ImageData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageData.mm; sourceTree = "<group>"; };
 		8DD76FB20486AB0100D96B5E /* PVRFix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PVRFix; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A0FF2C0290799A04C91782 /* PVRFix.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PVRFix.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,10 +68,14 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				4A68173411C081560057F54F /* PchApp.h */,
 				08FB7796FE84155DC02AAC07 /* main.mm */,
 				4A68173011C07EF20057F54F /* Image.h */,
 				4A68173111C07EF20057F54F /* Image.mm */,
-				4A68173411C081560057F54F /* PchApp.h */,
+				4A68178B11C094100057F54F /* ImagePixel.h */,
+				4A68178C11C094100057F54F /* ImagePixel.mm */,
+				4A68179311C095040057F54F /* ImageData.h */,
+				4A68179411C095040057F54F /* ImageData.mm */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -131,6 +141,8 @@
 			files = (
 				8DD76FAC0486AB0100D96B5E /* main.mm in Sources */,
 				4A68173211C07EF20057F54F /* Image.mm in Sources */,
+				4A68178D11C094100057F54F /* ImagePixel.mm in Sources */,
+				4A68179511C095040057F54F /* ImageData.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +178,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ENABLE_OPENMP_SUPPORT = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -182,6 +195,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ENABLE_OPENMP_SUPPORT = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = PchApp.h;

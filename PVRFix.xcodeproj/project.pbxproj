@@ -11,6 +11,7 @@
 		4A68173211C07EF20057F54F /* Image.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68173111C07EF20057F54F /* Image.mm */; };
 		4A68178D11C094100057F54F /* ImagePixel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68178C11C094100057F54F /* ImagePixel.mm */; };
 		4A68179511C095040057F54F /* ImageData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68179411C095040057F54F /* ImageData.mm */; };
+		4AE0F48E11C0C86100BD4C92 /* Dot3Extend.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0F48D11C0C86100BD4C92 /* Dot3Extend.mm */; };
 		8DD76FAC0486AB0100D96B5E /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.mm */; settings = {ATTRIBUTES = (); }; };
 		8DD76FB00486AB0100D96B5E /* PVRFix.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A0FF2C0290799A04C91782 /* PVRFix.1 */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,9 @@
 		4A68178C11C094100057F54F /* ImagePixel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImagePixel.mm; sourceTree = "<group>"; };
 		4A68179311C095040057F54F /* ImageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageData.h; sourceTree = "<group>"; };
 		4A68179411C095040057F54F /* ImageData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageData.mm; sourceTree = "<group>"; };
+		4AE0F48C11C0C86100BD4C92 /* Dot3Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dot3Extend.h; sourceTree = "<group>"; };
+		4AE0F48D11C0C86100BD4C92 /* Dot3Extend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Dot3Extend.mm; sourceTree = "<group>"; };
+		4AE0F48F11C0C87000BD4C92 /* ImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessor.h; sourceTree = "<group>"; };
 		8DD76FB20486AB0100D96B5E /* PVRFix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PVRFix; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A0FF2C0290799A04C91782 /* PVRFix.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PVRFix.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +80,9 @@
 				4A68178C11C094100057F54F /* ImagePixel.mm */,
 				4A68179311C095040057F54F /* ImageData.h */,
 				4A68179411C095040057F54F /* ImageData.mm */,
+				4AE0F48C11C0C86100BD4C92 /* Dot3Extend.h */,
+				4AE0F48D11C0C86100BD4C92 /* Dot3Extend.mm */,
+				4AE0F48F11C0C87000BD4C92 /* ImageProcessor.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -143,6 +150,7 @@
 				4A68173211C07EF20057F54F /* Image.mm in Sources */,
 				4A68178D11C094100057F54F /* ImagePixel.mm in Sources */,
 				4A68179511C095040057F54F /* ImageData.mm in Sources */,
+				4AE0F48E11C0C86100BD4C92 /* Dot3Extend.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,13 +15,26 @@ public:
 	ImageData(int iWidth, int iHeight);
 	virtual ~ImageData();
 	
-	ImagePixel& Pixel(int x, int y);
-	const ImagePixel& Pixel(int x, int y) const;
+	
+	inline ImagePixel& Pixel(int x, int y) {
+		return m_pixels[y * m_width + x];
+	}
+	inline const ImagePixel& Pixel(int x, int y) const {
+		return m_pixels[y * m_width + x];
+	}
+	
+	int Width() const;
+	int Height() const;
 	
 	void* GetBufferPtr();
 	int GetBufferSize() const;
 	
 protected:
+		// not implemented
+	ImageData(const ImageData& other);
+	ImageData& operator=(const ImageData& other);
+	
+	
 	int m_width;
 	int m_height;
 	

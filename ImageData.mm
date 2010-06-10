@@ -9,6 +9,8 @@
 
 #include "ImageData.h"
 
+
+
 ImageData::ImageData(int width, int height) :
 	m_width(width),
 	m_height(height),
@@ -22,16 +24,6 @@ ImageData::~ImageData()
 	delete[] m_pixels;
 }
 
-ImagePixel& ImageData::Pixel(int x, int y)
-{
-	return m_pixels[y * m_width + x];
-}
-
-const ImagePixel& ImageData::Pixel(int x, int y) const
-{
-	return m_pixels[y * m_width + x];
-}
-
 void* ImageData::GetBufferPtr()
 {
 	return m_pixels;
@@ -39,8 +31,21 @@ void* ImageData::GetBufferPtr()
 
 int ImageData::GetBufferSize() const
 {
+	return Width() * Height() * 4;
+}
+
+int ImageData::Width() const
+{
 	if (m_pixels == NULL) {
 		return 0;
 	}
-	return m_width * m_height * 4;
+	return m_width;
+}
+
+int ImageData::Height() const
+{
+	if (m_pixels == NULL) {
+		return 0;
+	}
+	return m_height;
 }

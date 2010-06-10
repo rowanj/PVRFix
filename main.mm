@@ -1,13 +1,8 @@
 #import "Image.h"
 
-int main (int argc, const char * argv[]) {
+#import "Dot3Extend.h"
 
-	/**
-	cout << "Called with args:" << endl;
-	for (int i(0); i < argc; ++i) {
-		cout << "(" << i << ") " << argv[i] << endl;
-	}
-	/**/
+int main (int argc, const char * argv[]) {
 	
 	if (argc != 2) {
 		cout << "Usage:" << endl;
@@ -17,7 +12,10 @@ int main (int argc, const char * argv[]) {
 	
 	cout << "Processing file: \"" << argv[1] << "\"" << endl;
 	Image oImg(argv[1]);
-	oImg.Process();
+	
+	Dot3Extend oExtender(500, 250);
+	oExtender.Process(oImg);
+
 
     return 0;
 }

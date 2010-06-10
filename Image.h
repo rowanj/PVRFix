@@ -14,22 +14,17 @@
 class Image
 {
 public:
-	
+	Image(ImageData* pData); // takes ownership of pData
 	Image(const string& strFilename);
 	virtual ~Image();
 	
-	void Process() const;
+	ImageData& Data();
+	const ImageData& Data() const;
+	
+	const CGColorSpaceRef ColorSpace() const;
+	
 
 private:
-	ImagePixel CalculateOutput(const int x, const int y) const;
-	list<pair<ImagePixel, float> > FindClosest(const int x, const int y) const;
-	
-	string m_strFilename;
-	CGImageRef m_refSourceImage;
 	CGColorSpaceRef m_colorSpace;
-
-	int m_width;
-	int m_height;
-
 	ImageData* m_pImageData;
 };

@@ -33,7 +33,11 @@ Image::Image(const string& strFilename) throw (ImageOpenFailure) :
 	
 	int width = CGImageGetWidth(refSourceImage);
 	int height = CGImageGetHeight(refSourceImage);
-	cout << "Image is " << width << "px wide and " << height << "px high" << endl;
+	
+	if (width == 0 || height == 0) {
+		cerr << "Image didn't have any readable pixels, is it a 32-bit RGBA PNG?" << endl;
+		throw ImageOpenFailure();
+	}
 	
 	m_pImageData = new ImageData(width, height);
 	

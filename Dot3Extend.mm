@@ -41,7 +41,7 @@ ImagePixel Dot3Extend::CalculateOutput(const Image& oSource, const int x, const 
 {
 	ImagePixel output(oSource.Data().Pixel(x, y));
 	if (output.a == 0) {
-		output.a = 255;
+		
 			// find all neighboring non-transparent pixels
 		list<pair<ImagePixel, float> > blendWith = FindClosest(oSource, x, y);
 		float fCount = blendWith.size();
@@ -82,6 +82,7 @@ ImagePixel Dot3Extend::CalculateOutput(const Image& oSource, const int x, const 
 			output.b = 255;
 		}
 	}
+	output.a = 255;
 	return output;
 }
 

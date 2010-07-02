@@ -85,35 +85,44 @@ int main (int argc, char * argv[]) {
 			
 			string strBaseName = strInFile.substr(0, strInFile.length() - 4);
 			
-			string strOutFile = strBaseName + "-extended.png";			
+			string strExtendedFile = strBaseName + "-extended.png";			
 			
 			try {
+					// Phase 1 - extend colours into transparencies to avoid blocking artifacts
 				FileProperties oInFileProps(strInFile);
 				if (!oInFileProps.Exists()) {
 					cout << "Error: input file \"" << strInFile << "\" does not exist.  Probably." << endl;
 					bError = true;
 					continue;
 				}
-				FileProperties oOutFileProps(strOutFile);
-				if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
+				
+				FileProperties oExtendedFileProps(strExtendedFile);
+				if (oExtendedFileProps.Exists() && oInFileProps.OlderThan(oExtendedFileProps)) {
 					cout << "Skipping \"" << strInFile << "\" - not modified since last processed." << endl;
+					continue;
+				} else {
+						// Create the image object (or throw...)
+					Image oImg(strInFile);
+				
+						// Process the file and write the output
+					cout << "Processing file \"" << strInFile << "\"" << endl;
+					cout << " -- extending colours into transparent area...";
+					oExtender.Process(oImg);
+					cout << " done." << endl;
+				
+					cout << " -- saving colour-extended version \"" << strExtendedFile << "\"...";
+					oImg.Save(strOutFile);
+					cout << " done." << endl;
+				}
+
+					// Now, compress the output to PVR
+				if (!oExtendedFileProps.Exists()) {
+					cout << "Error: colour-extended file \"" << strExtendedFile << "\" does not exist.  Should have been created..." << endl;
+					bError = true;
 					continue;
 				}
 				
-					// Create the image object (or throw...)
-				Image oImg(strInFile);
 				
-					// Process the file and write the output
-				cout << "Processing file \"" << strInFile << "\"" << endl;
-				cout << " -- extending colours into transparent area...";
-				oExtender.Process(oImg);
-				cout << " done." << endl;
-				
-				cout << " -- saving colour-extended version \"" << strOutFile << "\"...";
-				oImg.Save(strOutFile);
-				cout << " done." << endl;
-				
-					// Now, compress the output to PVR
 				
 				
 			} catch (ImageOpenFailure& oEx) {

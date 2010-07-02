@@ -76,15 +76,15 @@ void Image::Save(const string& strFilename) const throw (ImageSaveFailure)
 	CGDataProviderRelease(dataProvider);
 	
 		// Find the appropriate URL to export to
-	CFStringRef cstrFilename = CFStringCreateWithCString(NULL, strFilename.c_str(), CFStringGetSystemEncoding());
-	CFURLRef destinationURL = CFURLCreateWithString(NULL, cstrFilename, NULL);
-	CFRelease(cstrFilename);
+	NSString* nstrFilename = [[NSString alloc] initWithCString:strFilename.c_str()];
+	NSURL* pURL = [[NSURL alloc] initFileURLWithPath:nstrFilename];
+	[nstrFilename release];
 	
 		// Export the CGImage
-	CGImageDestinationRef exportDestination = CGImageDestinationCreateWithURL(destinationURL, kUTTypePNG, 1, NULL);
+	CGImageDestinationRef exportDestination = CGImageDestinationCreateWithURL((CFURLRef)pURL, kUTTypePNG, 1, NULL);
 	CGImageDestinationAddImage(exportDestination, image, NULL);
 	CGImageDestinationFinalize(exportDestination);
 	
-	CFRelease(destinationURL);
+	[pURL release];
 	CGImageRelease(image);
 }

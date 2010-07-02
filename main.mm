@@ -3,12 +3,67 @@
 #import "Dot3Extend.h"
 #import "FileProperties.h"
 
+#define VERBOSE(x) { if (verbose) { cout << x ; } }
+
 namespace po = boost::program_options;
+Dot3Extend* pDot3Extend = NULL;
+int verbose;
+bool bError = false;
+
+void DoDot3Extend(const string& strInFile, const string& strOutFile) {
+	FileProperties oInFileProps(strInFile);
+	FileProperties oOutFileProps(strOutFile);
+	if (!oInFileProps.Exists()) {
+		cout << "Error: Input file \"" << strInFile << "\" does not exist.  Why?" << endl;
+		bError = true;
+		return;
+	}
+	
+	if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
+		VERBOSE(" -- Skipping extending of \"" << strInFile << "\" - source not modified since last processed." << endl;)
+	} else {
+			// Create the image object (or throw...)
+		Image oImg(strInFile);
+		
+			// Process the file and write the output
+		VERBOSE(" -- extending colours into transparent area...";)
+		Image oExtended(pDot3Extend->Process(oImg));
+		VERBOSE(" done." << endl;)
+		
+		VERBOSE(" -- saving colour-extended version \"" << strOutFile << "\"...";)
+		oExtended.Save(strOutFile);
+		VERBOSE(" done." << endl;)
+	}
+}
+
+void DoPVRCompress(const string& strInFile, const string& strOutFile) {
+	FileProperties oInFileProps(strInFile);
+	FileProperties oOutFileProps(strOutFile);
+	if (!oInFileProps.Exists()) {
+		cout << "Error: Input file \"" << strInFile << "\" does not exist.  Why?" << endl;
+		bError = true;
+		return;
+	}
+	
+	if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
+		VERBOSE(" -- Skipping PVR compression of \"" << strInFile << "\" - source not modified since last compressed." << endl;)
+	} else {
+		VERBOSE(" -- compressing into PVR format; about to launch 'texturetool'" << endl;)
+		string strCommand = "./texturetool -f PVR -e PVRTC -m -o \"";
+		strCommand += strOutFile + "\" \"" + strInFile + "\"";
+		int iError = system(strCommand.c_str());
+		if (iError == 0) {						
+			VERBOSE(" -- successfully compressed \"" << strOutFile << "\"." << endl;)
+		} else {
+			cout << "Error: System did not successfully run \"" << strCommand << "\"";
+			bError = true;
+			return;
+		}
+	}
+}
 
 
 int main (int argc, char * argv[]) {
-	
-	bool bError(false);
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	try {
 		po::options_description desc("Allowed options");
@@ -19,7 +74,8 @@ int main (int argc, char * argv[]) {
 		("help", "produce help message")
 		("range", po::value<int>()->default_value(500), "how many pixels to extend the borders by")
 		("threshold", po::value<int>()->default_value(250), "alpha threshold to determine visible boundary")
-		("input,i", po::value< vector<string> >(), "input file");	
+		("input,i", po::value< vector<string> >(), "input file")
+		("verbose,v", "show progress messages");
 		
 		
 		po::variables_map vm;
@@ -63,9 +119,10 @@ int main (int argc, char * argv[]) {
 			return 1;
 		}
 		
+		verbose = vm.count("verbose");
 		
 		bError = false; // re-set the error flag..
-		Dot3Extend oExtender(range, threshold);
+		pDot3Extend = new Dot3Extend(range, threshold);
 		for (vector<string>::const_iterator it(aInFiles.begin());
 			 it != aInFiles.end(); ++it) {
 				// Generate the output filename
@@ -77,18 +134,23 @@ int main (int argc, char * argv[]) {
 			}
 			
 			const string strExtension(strInFile.substr(strInFile.length() - 4));
-			if (strExtension != ".png" && strExtension != ".PNG") {
-				cerr << "Input file \"" << strInFile << "\" does not end with .png or .PNG - skipping." << endl;
+			if (strExtension != ".png") {
+				cerr << "Input file \"" << strInFile << "\" does not end with .png - skipping." << endl;
 				bError = true;
 				continue;
 			}
 			
-			string strBaseName = strInFile.substr(0, strInFile.length() - 4);
+			if (strInFile.length() > strlen("-extended.png") && strInFile.substr(strInFile.length() - strlen("-extended.png")) == "-extended.png") {
+				VERBOSE("Skipping \"" << strInFile << "\", as is probably an output from a previous run." << endl);
+				continue;
+			}
 			
-			string strExtendedFile = strBaseName + "-extended.png";			
+			const string strBaseName = strInFile.substr(0, strInFile.length() - 4);
+			
+			const string strExtendedFile = strBaseName + "-extended.png";		
+			const string strPVRFile = strBaseName + ".pvr";
 			
 			try {
-					// Phase 1 - extend colours into transparencies to avoid blocking artifacts
 				FileProperties oInFileProps(strInFile);
 				if (!oInFileProps.Exists()) {
 					cout << "Error: input file \"" << strInFile << "\" does not exist.  Probably." << endl;
@@ -96,35 +158,14 @@ int main (int argc, char * argv[]) {
 					continue;
 				}
 				
-				FileProperties oExtendedFileProps(strExtendedFile);
-				if (oExtendedFileProps.Exists() && oInFileProps.OlderThan(oExtendedFileProps)) {
-					cout << "Skipping \"" << strInFile << "\" - not modified since last processed." << endl;
-					continue;
+				cout << "Processing file \"" << strInFile << "\"" << endl;
+					// Phase 1 - extend colours into transparencies to avoid blocking artifacts
+				if (strBaseName.substr(strBaseName.length() - strlen(" Dot3")) == " Dot3") {
+					DoDot3Extend(strInFile, strExtendedFile);
+					DoPVRCompress(strExtendedFile, strPVRFile);
 				} else {
-						// Create the image object (or throw...)
-					Image oImg(strInFile);
-				
-						// Process the file and write the output
-					cout << "Processing file \"" << strInFile << "\"" << endl;
-					cout << " -- extending colours into transparent area...";
-					oExtender.Process(oImg);
-					cout << " done." << endl;
-				
-					cout << " -- saving colour-extended version \"" << strExtendedFile << "\"...";
-					oImg.Save(strOutFile);
-					cout << " done." << endl;
+					DoPVRCompress(strInFile, strPVRFile);
 				}
-
-					// Now, compress the output to PVR
-				if (!oExtendedFileProps.Exists()) {
-					cout << "Error: colour-extended file \"" << strExtendedFile << "\" does not exist.  Should have been created..." << endl;
-					bError = true;
-					continue;
-				}
-				
-				
-				
-				
 			} catch (ImageOpenFailure& oEx) {
 				cout << "Error: could not read image file \"" << strInFile << "\" - continuing with next file (if any)." << endl;
 				bError = true;
@@ -134,8 +175,6 @@ int main (int argc, char * argv[]) {
 				bError = true;
 				continue;
 			}
-			
-			cout << strOutFile << endl;			
 		}
 	} catch (std::exception& oEx) {
 		cerr << "Unhandled exception - " << oEx.what() << endl;
@@ -145,6 +184,7 @@ int main (int argc, char * argv[]) {
 		bError = true;
 	}
 	
+	delete pDot3Extend;
 	[pool drain];
 	return bError;
 }

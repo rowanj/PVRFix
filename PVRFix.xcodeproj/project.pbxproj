@@ -11,6 +11,7 @@
 		4A68173211C07EF20057F54F /* Image.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68173111C07EF20057F54F /* Image.mm */; };
 		4A68178D11C094100057F54F /* ImagePixel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68178C11C094100057F54F /* ImagePixel.mm */; };
 		4A68179511C095040057F54F /* ImageData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4A68179411C095040057F54F /* ImageData.mm */; };
+		4AAAC3C6125F06970013E7B4 /* Dot3Light.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AAAC3C5125F06970013E7B4 /* Dot3Light.mm */; };
 		4AC3325511DD7DE700BA1207 /* FileProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3325411DD7DE700BA1207 /* FileProperties.mm */; };
 		4AC3329C11DDB9AE00BA1207 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC3329B11DDB9AE00BA1207 /* Foundation.framework */; };
 		4AE0F48E11C0C86100BD4C92 /* Dot3Extend.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0F48D11C0C86100BD4C92 /* Dot3Extend.mm */; };
@@ -41,6 +42,8 @@
 		4A68178C11C094100057F54F /* ImagePixel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImagePixel.mm; sourceTree = "<group>"; };
 		4A68179311C095040057F54F /* ImageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageData.h; sourceTree = "<group>"; };
 		4A68179411C095040057F54F /* ImageData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageData.mm; sourceTree = "<group>"; };
+		4AAAC3C4125F06970013E7B4 /* Dot3Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dot3Light.h; sourceTree = "<group>"; };
+		4AAAC3C5125F06970013E7B4 /* Dot3Light.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Dot3Light.mm; sourceTree = "<group>"; };
 		4AAAC412125F0D4E0013E7B4 /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 		4AC3325311DD7DE700BA1207 /* FileProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileProperties.h; sourceTree = "<group>"; };
 		4AC3325411DD7DE700BA1207 /* FileProperties.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FileProperties.mm; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 				4AE0F48F11C0C87000BD4C92 /* ImageProcessor.h */,
 				4AC3325311DD7DE700BA1207 /* FileProperties.h */,
 				4AC3325411DD7DE700BA1207 /* FileProperties.mm */,
+				4AAAC3C4125F06970013E7B4 /* Dot3Light.h */,
+				4AAAC3C5125F06970013E7B4 /* Dot3Light.mm */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				4A68179511C095040057F54F /* ImageData.mm in Sources */,
 				4AE0F48E11C0C86100BD4C92 /* Dot3Extend.mm in Sources */,
 				4AC3325511DD7DE700BA1207 /* FileProperties.mm in Sources */,
+				4AAAC3C6125F06970013E7B4 /* Dot3Light.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

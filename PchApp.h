@@ -20,3 +20,5 @@
 using namespace boost;
 
 using namespace std;
+
+#define ASSERT(x) ;

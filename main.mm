@@ -6,62 +6,46 @@
 
 #define VERBOSE(x) { if (verbose) { cout << x ; } }
 
-namespace po = boost::program_options;
-Dot3Extend* pDot3Extend = NULL;
-Dot3Light* pDot3Light = NULL;
-int verbose;
-bool bError = false;
-
-void DoDot3Extend(const string& strInFile, const string& strOutFile) {
-	FileProperties oInFileProps(strInFile);
-	FileProperties oOutFileProps(strOutFile);
-	if (!oInFileProps.Exists()) {
-		cout << "Error: Input file \"" << strInFile << "\" does not exist.  Why?" << endl;
-		bError = true;
-		return;
+namespace {
+	bool bError = false;
+	namespace po = boost::program_options;
+	Dot3Extend* pDot3Extend = NULL;
+	Dot3Light* pDot3Light = NULL;
+	int verbose;
+	
+	bool StringEndsWith(const string& strInput, const string& strSuffix) {
+		return ( strInput.length() > strSuffix.length() &&
+				 strInput.substr(strInput.length() - strSuffix.length()) == strSuffix
+				);
 	}
 	
-	if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
-		VERBOSE(" -- Skipping extending of \"" << strInFile << "\" - source not modified since last processed." << endl;)
-	} else {
+	void DoStep(const string& strInFile, const string& strOutFile, const ImageProcessor* pProcessor) {
+		FileProperties oInFileProps(strInFile);
+		FileProperties oOutFileProps(strOutFile);
+		if (!oInFileProps.Exists()) {
+			cout << "Error: Input file \"" << strInFile << "\" does not exist.  Why?" << endl;
+			bError = true;
+			return;
+		}
+			
+		if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
+			VERBOSE(" -- Skipping step of creating \"" << strOutFile << "\" from \"" << strInFile << "\"\n\tsource not modified since last processed." << endl;)
+		} else {
 			// Create the image object (or throw...)
-		Image oImg(strInFile);
-		
+			Image oImg(strInFile);
+			
 			// Process the file and write the output
-		VERBOSE(" -- extending colours into transparent area...";)
-		Image oExtended(pDot3Extend->Process(oImg));
-		VERBOSE(" done." << endl;)
-		
-		VERBOSE(" -- saving colour-extended version \"" << strOutFile << "\"...";)
-		oExtended.Save(strOutFile);
-		VERBOSE(" done." << endl;)
+			VERBOSE(" -- extending colours into transparent area...";)
+			Image oOutput(pProcessor->Process(oImg));
+			VERBOSE(" done." << endl;)
+				
+			VERBOSE(" -- saving colour-extended version \"" << strOutFile << "\"...";)
+			oOutput.Save(strOutFile);
+			VERBOSE(" done." << endl;)
+		}
 	}
 }
 
-void DoLightDot3(const string& strInFile, const string& strOutFile) {
-	FileProperties oInFileProps(strInFile);
-	FileProperties oOutFileProps(strOutFile);
-	if (!oInFileProps.Exists()) {
-		cout << "Error: Input file \"" << strInFile << "\" does not exist.  Why?" << endl;
-		bError = true;
-		return;
-	}
-	
-	if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
-		VERBOSE(" -- Skipping extending of \"" << strInFile << "\" - source not modified since last processed." << endl;)
-	} else {
-		Image oImg(strInFile);
-		
-		// Process the file and write the output
-		VERBOSE(" -- Lighting according to Dot3 model...";)
-		Image oLit(pDot3Light->Process(oImg));
-		VERBOSE(" done." << endl;)
-		
-		VERBOSE(" -- saving lit version \"" << strOutFile << "\"...";)
-		oLit.Save(strOutFile);
-		VERBOSE(" done." << endl;)
-	}
-}
 
 void DoPVRCompress(const string& strInFile, const string& strOutFile) {
 	FileProperties oInFileProps(strInFile);
@@ -163,6 +147,8 @@ int main (int argc, char * argv[]) {
 				continue;
 			}
 			
+			if (!StringEndsWith(strInFile, ".png")) {
+			}
 			const string strExtension(strInFile.substr(strInFile.length() - 4));
 			if (strExtension != ".png") {
 				cerr << "Input file \"" << strInFile << "\" does not end with .png - skipping." << endl;
@@ -170,12 +156,8 @@ int main (int argc, char * argv[]) {
 				continue;
 			}
 			
-			if (strInFile.length() > strlen("-extended.png") && strInFile.substr(strInFile.length() - strlen("-extended.png")) == "-extended.png") {
-				VERBOSE("Skipping \"" << strInFile << "\", as is probably an output from a previous run." << endl);
-				continue;
-			}
-			
-			if (strInFile.length() > strlen("-lit.png") && strInFile.substr(strInFile.length() - strlen("-lit.png")) == "-extended.png") {
+			if (StringEndsWith(strInFile, "-extended.png") ||
+				StringEndsWith(strInFile, "-lit.png")) {
 				VERBOSE("Skipping \"" << strInFile << "\", as is probably an output from a previous run." << endl);
 				continue;
 			}
@@ -196,9 +178,9 @@ int main (int argc, char * argv[]) {
 				
 				cout << "Processing file \"" << strInFile << "\"" << endl;
 					// Phase 1 - extend colours into transparencies to avoid blocking artifacts
-				if (strBaseName.substr(strBaseName.length() - strlen(" Dot3")) == " Dot3") {
-					DoLightDot3(strInFile, strLitFile);
-					DoDot3Extend(strInFile, strExtendedFile);
+				if (StringEndsWith(strBaseName, " Dot3")) {
+					DoStep(strInFile, strLitFile, pDot3Light);
+					DoStep(strInFile, strExtendedFile, pDot3Extend);
 					DoPVRCompress(strExtendedFile, strPVRFile);
 				} else {
 					DoPVRCompress(strInFile, strPVRFile);
@@ -208,7 +190,7 @@ int main (int argc, char * argv[]) {
 				bError = true;
 				continue;
 			} catch (ImageSaveFailure& oEx) {
-				cout << "Error saving alpha-extend version of file \"" << strInFile << "\" - continuing with next file (if any)." << endl;
+				cout << "Error saving output of file \"" << strInFile << "\" - continuing with next file (if any)." << endl;
 				bError = true;
 				continue;
 			}

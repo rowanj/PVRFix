@@ -15,6 +15,7 @@
 		4AC3325511DD7DE700BA1207 /* FileProperties.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3325411DD7DE700BA1207 /* FileProperties.mm */; };
 		4AC3329C11DDB9AE00BA1207 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC3329B11DDB9AE00BA1207 /* Foundation.framework */; };
 		4AE0F48E11C0C86100BD4C92 /* Dot3Extend.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0F48D11C0C86100BD4C92 /* Dot3Extend.mm */; };
+		4AFB0BC41265ABDB00A4ABC4 /* AlphaBitMap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AFB0BC31265ABDB00A4ABC4 /* AlphaBitMap.mm */; };
 		8DD76FAC0486AB0100D96B5E /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.mm */; settings = {ATTRIBUTES = (); }; };
 		8DD76FB00486AB0100D96B5E /* PVRFix.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A0FF2C0290799A04C91782 /* PVRFix.1 */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,8 @@
 		4AE0F48C11C0C86100BD4C92 /* Dot3Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dot3Extend.h; sourceTree = "<group>"; };
 		4AE0F48D11C0C86100BD4C92 /* Dot3Extend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Dot3Extend.mm; sourceTree = "<group>"; };
 		4AE0F48F11C0C87000BD4C92 /* ImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessor.h; sourceTree = "<group>"; };
+		4AFB0BC21265ABDB00A4ABC4 /* AlphaBitMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlphaBitMap.h; sourceTree = "<group>"; };
+		4AFB0BC31265ABDB00A4ABC4 /* AlphaBitMap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AlphaBitMap.mm; sourceTree = "<group>"; };
 		8DD76FB20486AB0100D96B5E /* PVRFix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PVRFix; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A0FF2C0290799A04C91782 /* PVRFix.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PVRFix.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +102,8 @@
 				4AC3325411DD7DE700BA1207 /* FileProperties.mm */,
 				4AAAC3C4125F06970013E7B4 /* Dot3Light.h */,
 				4AAAC3C5125F06970013E7B4 /* Dot3Light.mm */,
+				4AFB0BC21265ABDB00A4ABC4 /* AlphaBitMap.h */,
+				4AFB0BC31265ABDB00A4ABC4 /* AlphaBitMap.mm */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 				4AE0F48E11C0C86100BD4C92 /* Dot3Extend.mm in Sources */,
 				4AC3325511DD7DE700BA1207 /* FileProperties.mm in Sources */,
 				4AAAC3C6125F06970013E7B4 /* Dot3Light.mm in Sources */,
+				4AFB0BC41265ABDB00A4ABC4 /* AlphaBitMap.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +227,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(HOME)/include";
 				LIBRARY_SEARCH_PATHS = "$(HOME)/lib";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lboost_program_options";
 				PREBINDING = NO;
@@ -250,6 +257,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(HOME)/include";
 				LIBRARY_SEARCH_PATHS = "$(HOME)/lib";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_LDFLAGS = "-lboost_program_options";
 				SDKROOT = macosx10.5;
 			};

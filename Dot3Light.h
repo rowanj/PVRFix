@@ -13,7 +13,7 @@
 class Dot3Light : public ImageProcessor
 {
 public:
-	Dot3Light(float fLightX, float fLightY, float fLightZ);
+	Dot3Light(float fLightX, float fLightY, float fLightZ, float fDiffuse, float fSpecular);
 	~Dot3Light();
 	
 	Image Process(const Image& oSource) const;
@@ -24,5 +24,8 @@ protected:
 	const float m_fLightX;
 	const float m_fLightY;
 	const float m_fLightZ;
+	
+	const float m_fDiffuse;
+	const float m_fSpecular;
 };
 

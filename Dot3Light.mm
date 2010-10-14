@@ -12,10 +12,12 @@
 #import "Image.h"
 #import "Math.h"
 
-Dot3Light::Dot3Light(float fLightX, float fLightY, float fLightZ) :
+Dot3Light::Dot3Light(float fLightX, float fLightY, float fLightZ, float fDiffuse, float fSpecular) :
 	m_fLightX(fLightX),
 	m_fLightY(fLightY),
-	m_fLightZ(fLightZ)
+	m_fLightZ(fLightZ),
+	m_fDiffuse(fDiffuse),
+	m_fSpecular(fSpecular)
 {
 }
 

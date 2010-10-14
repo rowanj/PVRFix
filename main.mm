@@ -136,7 +136,7 @@ int main (int argc, char * argv[]) {
 		pDot3Extend = new Dot3Extend(range, threshold);
 
 		// || z = 0.75 ES1, 0.65 ES2
-		pDot3Light = new Dot3Light(-0.7f, -0.4f, 0.65f);
+		pDot3Light = new Dot3Light(-0.7f, -0.4f, 0.65f, 1.0f, 1.0f);
 		for (vector<string>::const_iterator it(aInFiles.begin());
 			 it != aInFiles.end(); ++it) {
 				// Generate the output filename

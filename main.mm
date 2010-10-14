@@ -3,6 +3,7 @@
 #import "Dot3Extend.h"
 #import "Dot3Light.h"
 #import "FileProperties.h"
+#import "AlphaBitMap.h"
 
 #define VERBOSE(x) { if (verbose) { cout << x ; } }
 
@@ -19,46 +20,46 @@ namespace {
 				);
 	}
 	
-	void DoStep(const string& strInFile, const string& strOutFile, const ImageProcessor* pProcessor) {
+	// 'Make' type check about if input file exists and is newer than output file
+	bool CheckShouldProcess(const string& strInFile, const string& strOutFile) {
 		FileProperties oInFileProps(strInFile);
 		FileProperties oOutFileProps(strOutFile);
 		if (!oInFileProps.Exists()) {
 			cout << "Error: Input file \"" << strInFile << "\" does not exist.  Why?" << endl;
 			bError = true;
+			return false;
+		}
+		if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
+			VERBOSE(" -- Skipping step of creating \n\t\"" << strOutFile << "\" from\n\t\"" << strInFile << "\"\n\tsource not modified since last processed." << endl;)
+			return false;
+		}
+		return true;
+	}
+	
+	// Generic ImageProcessor operation into file
+	void DoStep(const string& strInFile, const string& strOutFile, const ImageProcessor* pProcessor) {
+		if (!CheckShouldProcess(strInFile, strOutFile)) {
 			return;
 		}
 			
-		if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
-			VERBOSE(" -- Skipping step of creating \"" << strOutFile << "\" from \"" << strInFile << "\"\n\tsource not modified since last processed." << endl;)
-		} else {
-			// Create the image object (or throw...)
-			Image oImg(strInFile);
+		// Create the image object (or throw...)
+		Image oImg(strInFile);
 			
-			// Process the file and write the output
-			VERBOSE(" -- extending colours into transparent area...";)
-			Image oOutput(pProcessor->Process(oImg));
-			VERBOSE(" done." << endl;)
+		// Process the file and write the output
+		VERBOSE(" -- Creating data for \"" << strOutFile << "\"...";)
+		Image oOutput(pProcessor->Process(oImg));
+		VERBOSE(" done." << endl;)
 				
-			VERBOSE(" -- saving colour-extended version \"" << strOutFile << "\"...";)
-			oOutput.Save(strOutFile);
-			VERBOSE(" done." << endl;)
+		VERBOSE(" -- Saving \"" << strOutFile << "\"...";)
+		oOutput.Save(strOutFile);
+		VERBOSE(" done." << endl;)
+	}
+
+	void DoPVRCompress(const string& strInFile, const string& strOutFile) {
+		if (!CheckShouldProcess(strInFile, strOutFile)) {
+			return;
 		}
-	}
-}
-
-
-void DoPVRCompress(const string& strInFile, const string& strOutFile) {
-	FileProperties oInFileProps(strInFile);
-	FileProperties oOutFileProps(strOutFile);
-	if (!oInFileProps.Exists()) {
-		cout << "Error: Input file \"" << strInFile << "\" does not exist.  Why?" << endl;
-		bError = true;
-		return;
-	}
-	
-	if (oOutFileProps.Exists() && oInFileProps.OlderThan(oOutFileProps)) {
-		VERBOSE(" -- Skipping PVR compression of \"" << strInFile << "\" - source not modified since last compressed." << endl;)
-	} else {
+		
 		VERBOSE(" -- compressing into PVR format; about to launch 'texturetool'" << endl;)
 		string strCommand = "./texturetool -f PVR -e PVRTC -m -o \"";
 		strCommand += strOutFile + "\" \"" + strInFile + "\"";
@@ -70,9 +71,18 @@ void DoPVRCompress(const string& strInFile, const string& strOutFile) {
 			bError = true;
 			return;
 		}
+	} 
+			
+	void DoMakeAlpha(const string& strInFile, const string& strOutFile) {
+		if (!CheckShouldProcess(strInFile, strOutFile)) {
+			return;
+		}
+		
+		Image oImg(strInFile);
+		AlphaBitMap oAlphaBitMap(32, oImg);
+		oAlphaBitMap.Save(strOutFile);
 	}
 }
-
 
 int main (int argc, char * argv[]) {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -156,8 +166,9 @@ int main (int argc, char * argv[]) {
 				continue;
 			}
 			
-			if (StringEndsWith(strInFile, "-extended.png") ||
-				StringEndsWith(strInFile, "-lit.png")) {
+			if ( StringEndsWith(strInFile, "-extended.png") ||
+				 StringEndsWith(strInFile, "-lit.png") ||
+				 StringEndsWith(strInFile, "-alpha.raw") ) {
 				VERBOSE("Skipping \"" << strInFile << "\", as is probably an output from a previous run." << endl);
 				continue;
 			}
@@ -167,6 +178,7 @@ int main (int argc, char * argv[]) {
 			const string strExtendedFile = strBaseName + "-extended.png";		
 			const string strLitFile = strBaseName + "-lit.png";		
 			const string strPVRFile = strBaseName + ".pvr";
+			const string strAlphaFile = strBaseName + "-alpha.raw"; 
 			
 			try {
 				FileProperties oInFileProps(strInFile);
@@ -184,6 +196,7 @@ int main (int argc, char * argv[]) {
 					DoPVRCompress(strExtendedFile, strPVRFile);
 				} else {
 					DoPVRCompress(strInFile, strPVRFile);
+					DoMakeAlpha(strInFile, strAlphaFile);
 				}
 			} catch (ImageOpenFailure& oEx) {
 				cout << "Error: could not read image file \"" << strInFile << "\" - continuing with next file (if any)." << endl;

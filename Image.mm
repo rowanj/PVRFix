@@ -42,6 +42,7 @@ Image::Image(const string& strFilename) throw (ImageOpenFailure) :
 	m_pImageData = new ImageData(width, height);
 	
 	m_colorSpace = CGImageGetColorSpace(refSourceImage);
+	CGColorSpaceRetain(m_colorSpace);
 	
 	CGContextRef imageContext = CGBitmapContextCreate(m_pImageData->GetBufferPtr(), width, height, 8, width * 4, m_colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
 

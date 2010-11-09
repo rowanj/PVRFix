@@ -20,6 +20,7 @@ struct AlphaBitMapHeader
 	char magic[8];
 	char text[12];
 	unsigned int version;
+	unsigned int header_size;
 	unsigned int width;
 	unsigned int height;
 };
@@ -76,6 +77,7 @@ void AlphaBitMap::Save(const string& strFileName) const
 	memcpy(oHeader.magic, "RawAlpha", 8);
 	memcpy(oHeader.text, "1bpp alpha", 10); 
 	oHeader.version = CFSwapInt32HostToLittle(1);
+	oHeader.header_size = CFSwapInt32HostToLittle(sizeof(AlphaBitMapHeader));
 	oHeader.width = CFSwapInt32HostToLittle(m_iSize);
 	oHeader.height = CFSwapInt32HostToLittle(m_iSize);
 	

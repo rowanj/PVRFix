@@ -236,7 +236,7 @@ int main (int argc, char * argv[]) {
 					continue;
 				}
 				
-				cout << "Processing file \"" << strInFile << "\"" << endl;
+				VERBOSE("Processing file \"" << strInFile << "\"" << endl;)
 					// Phase 1 - extend colours into transparencies to avoid blocking artifacts
 				if (StringEndsWith(strBaseName, " Dot3")) {
 					DoStep(strInFile, strLitFile, pDot3Light);

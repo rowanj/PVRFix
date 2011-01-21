@@ -90,8 +90,8 @@ namespace {
 			
 			// texturetool has a nasty bug - the PPC (universal) binary shipped by Apple
 			// around the time of the iPhone OS 3.2 SDK is not endian-aware, and writes
-			// byte-swapped headers.  Newer versions removed the PPC version of the binary
-			if (CFByteOrderGetCurrent() == CFByteOrderBigEndian) {
+			// byte-swapped headers.  Newer versions removed the PPC version of the binary, probably for this reason
+			//			if (CFByteOrderGetCurrent() == CFByteOrderBigEndian) {
 				//			cout << "Host is big endian, trying to fix PVR " << strOutFile << endl;
 				NSData* pFile = [[NSData alloc] initWithContentsOfFile:[NSString stringWithUTF8String:strOutFile.c_str()]];
 				NSMutableData* pNewFile = [pFile mutableCopy];
@@ -100,23 +100,27 @@ namespace {
 				uint32_t iHeaderSize;
 				[pNewFile getBytes:&iHeaderSize length:4];
 				if (iHeaderSize == 0x34) {
-					//				cout << "Fixing endianness bug in \"" << strOutFile << "\"...";
 					void* newData = [pNewFile mutableBytes];
 					uint32_t* newInts = static_cast<uint32_t*>(newData);
 					
 					const int iInts = iHeaderSize / sizeof(uint32_t);
-					for (int i(0); i < iInts; ++i) {
-						newInts[i] = CFSwapInt32(newInts[i]);
+					if (newInts[11] == *reinterpret_cast<const uint32_t*>("PVR!")) {
+						cout << "- " << strOutFile << " is not byte swapped" <<endl;
+					} else if (newInts[11] == *reinterpret_cast<const uint32_t*>("!RVP")) {
+						cout << "+ " << strOutFile << " is byte swapped" <<endl;
+						for (int i(0); i < iInts; ++i) {
+							newInts[i] = CFSwapInt32(newInts[i]);
+						}
+						[pNewFile writeToFile:[NSString stringWithUTF8String:strOutFile.c_str()] atomically: NO];
+					} else {
+						cout << "! " << strOutFile << " has unknown magic bytes" << endl;
 					}
 					
-					//				cout << " done." << endl;
-					
-					[pNewFile writeToFile:[NSString stringWithUTF8String:strOutFile.c_str()] atomically: NO];
 				} else {
 					cout << "Error: no idea what to do about endianness of \"" << strOutFile << "\" - header length not recognised" << endl;
 					bError = true;
 				}
-			}
+			//}
 			exit(0);
 		}
 	} 

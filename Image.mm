@@ -92,4 +92,5 @@ void Image::Save(const string& strFilename) const throw (ImageSaveFailure)
 	
 	[pURL release];
 	CGImageRelease(image);
+	CFRelease(exportDestination);
 }

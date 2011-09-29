@@ -84,7 +84,7 @@ void AlphaBitMap::Save(const string& strFileName) const
 	file.write(reinterpret_cast<const char*>(&oHeader), sizeof(AlphaBitMapHeader));
 
 	int iBit(0);
-	unsigned char iByte;
+	unsigned char iByte(0);
 	for (size_t pixel(0); pixel < m_iSize * m_iSize; ++pixel) {
 		if (m_pData[pixel] > 10.0f) {
 			unsigned char iThisBit = 1 << (7 - iBit);

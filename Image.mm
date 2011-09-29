@@ -81,7 +81,7 @@ void Image::Save(const string& strFilename) const throw (ImageSaveFailure)
 	CGDataProviderRelease(dataProvider);
 	
 		// Find the appropriate URL to export to
-	NSString* nstrFilename = [[NSString alloc] initWithCString:strFilename.c_str()];
+	NSString* nstrFilename = [[NSString alloc] initWithUTF8String:strFilename.c_str()];
 	NSURL* pURL = [[NSURL alloc] initFileURLWithPath:nstrFilename];
 	[nstrFilename release];
 	

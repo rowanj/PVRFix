@@ -12,7 +12,7 @@
 FileProperties::FileProperties(const string& strPath) :
 	m_strPath(nil)
 {
-	m_strPath = [[NSString alloc] initWithCString:strPath.c_str()];
+	m_strPath = [[NSString alloc] initWithUTF8String:strPath.c_str()];
 }
 
 FileProperties::~FileProperties()

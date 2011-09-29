@@ -16,9 +16,31 @@
 		4AC3329C11DDB9AE00BA1207 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC3329B11DDB9AE00BA1207 /* Foundation.framework */; };
 		4AE0F48E11C0C86100BD4C92 /* Dot3Extend.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0F48D11C0C86100BD4C92 /* Dot3Extend.mm */; };
 		4AFB0BC41265ABDB00A4ABC4 /* AlphaBitMap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AFB0BC31265ABDB00A4ABC4 /* AlphaBitMap.mm */; };
+		4AFC637D14348500001D6996 /* cmdline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633414348389001D6996 /* cmdline.cpp */; };
+		4AFC637E14348500001D6996 /* config_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633514348389001D6996 /* config_file.cpp */; };
+		4AFC637F14348500001D6996 /* convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633614348389001D6996 /* convert.cpp */; };
+		4AFC638014348500001D6996 /* options_description.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633714348389001D6996 /* options_description.cpp */; };
+		4AFC638114348500001D6996 /* parsers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633814348389001D6996 /* parsers.cpp */; };
+		4AFC638214348500001D6996 /* positional_options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633914348389001D6996 /* positional_options.cpp */; };
+		4AFC638314348500001D6996 /* split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633A14348389001D6996 /* split.cpp */; };
+		4AFC638414348500001D6996 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633B14348389001D6996 /* utf8_codecvt_facet.cpp */; };
+		4AFC638514348500001D6996 /* value_semantic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633C14348389001D6996 /* value_semantic.cpp */; };
+		4AFC638614348500001D6996 /* variables_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633D14348389001D6996 /* variables_map.cpp */; };
+		4AFC638714348500001D6996 /* winmain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC633E14348389001D6996 /* winmain.cpp */; };
+		4AFC638F143486D2001D6996 /* libBoost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AFC637714348457001D6996 /* libBoost.a */; };
 		8DD76FAC0486AB0100D96B5E /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.mm */; settings = {ATTRIBUTES = (); }; };
 		8DD76FB00486AB0100D96B5E /* PVRFix.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A0FF2C0290799A04C91782 /* PVRFix.1 */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4AFC638814348515001D6996 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AFC637614348457001D6996;
+			remoteInfo = Boost;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8DD76FAF0486AB0100D96B5E /* CopyFiles */ = {
@@ -54,15 +76,35 @@
 		4AE0F48F11C0C87000BD4C92 /* ImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessor.h; sourceTree = "<group>"; };
 		4AFB0BC21265ABDB00A4ABC4 /* AlphaBitMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlphaBitMap.h; sourceTree = "<group>"; };
 		4AFB0BC31265ABDB00A4ABC4 /* AlphaBitMap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AlphaBitMap.mm; sourceTree = "<group>"; };
+		4AFC633414348389001D6996 /* cmdline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cmdline.cpp; sourceTree = "<group>"; };
+		4AFC633514348389001D6996 /* config_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = config_file.cpp; sourceTree = "<group>"; };
+		4AFC633614348389001D6996 /* convert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = convert.cpp; sourceTree = "<group>"; };
+		4AFC633714348389001D6996 /* options_description.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = options_description.cpp; sourceTree = "<group>"; };
+		4AFC633814348389001D6996 /* parsers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parsers.cpp; sourceTree = "<group>"; };
+		4AFC633914348389001D6996 /* positional_options.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = positional_options.cpp; sourceTree = "<group>"; };
+		4AFC633A14348389001D6996 /* split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = split.cpp; sourceTree = "<group>"; };
+		4AFC633B14348389001D6996 /* utf8_codecvt_facet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utf8_codecvt_facet.cpp; sourceTree = "<group>"; };
+		4AFC633C14348389001D6996 /* value_semantic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = value_semantic.cpp; sourceTree = "<group>"; };
+		4AFC633D14348389001D6996 /* variables_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = variables_map.cpp; sourceTree = "<group>"; };
+		4AFC633E14348389001D6996 /* winmain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = winmain.cpp; sourceTree = "<group>"; };
+		4AFC637714348457001D6996 /* libBoost.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBoost.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD76FB20486AB0100D96B5E /* PVRFix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PVRFix; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A0FF2C0290799A04C91782 /* PVRFix.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PVRFix.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4AFC637414348457001D6996 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76FAD0486AB0100D96B5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AFC638F143486D2001D6996 /* libBoost.a in Frameworks */,
 				4A68171B11C07D520057F54F /* ApplicationServices.framework in Frameworks */,
 				4AC3329C11DDB9AE00BA1207 /* Foundation.framework in Frameworks */,
 			);
@@ -74,6 +116,7 @@
 		08FB7794FE84155DC02AAC07 /* PVRFix */ = {
 			isa = PBXGroup;
 			children = (
+				4AFC630B14348354001D6996 /* Boost */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -112,8 +155,44 @@
 			isa = PBXGroup;
 			children = (
 				8DD76FB20486AB0100D96B5E /* PVRFix */,
+				4AFC637714348457001D6996 /* libBoost.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4AFC630B14348354001D6996 /* Boost */ = {
+			isa = PBXGroup;
+			children = (
+				4AFC630C14348389001D6996 /* program_options */,
+			);
+			name = Boost;
+			sourceTree = "<group>";
+		};
+		4AFC630C14348389001D6996 /* program_options */ = {
+			isa = PBXGroup;
+			children = (
+				4AFC633314348389001D6996 /* src */,
+			);
+			name = program_options;
+			path = boost_1_47_0/libs/program_options;
+			sourceTree = "<group>";
+		};
+		4AFC633314348389001D6996 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4AFC633414348389001D6996 /* cmdline.cpp */,
+				4AFC633514348389001D6996 /* config_file.cpp */,
+				4AFC633614348389001D6996 /* convert.cpp */,
+				4AFC633714348389001D6996 /* options_description.cpp */,
+				4AFC633814348389001D6996 /* parsers.cpp */,
+				4AFC633914348389001D6996 /* positional_options.cpp */,
+				4AFC633A14348389001D6996 /* split.cpp */,
+				4AFC633B14348389001D6996 /* utf8_codecvt_facet.cpp */,
+				4AFC633C14348389001D6996 /* value_semantic.cpp */,
+				4AFC633D14348389001D6996 /* variables_map.cpp */,
+				4AFC633E14348389001D6996 /* winmain.cpp */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		C6A0FF2B0290797F04C91782 /* Documentation */ = {
@@ -126,7 +205,36 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		4AFC637514348457001D6996 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		4AFC637614348457001D6996 /* Boost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AFC637814348457001D6996 /* Build configuration list for PBXNativeTarget "Boost" */;
+			buildPhases = (
+				4AFC637B14348491001D6996 /* Get Boost */,
+				4AFC637C143484B0001D6996 /* Extract Boost */,
+				4AFC637314348457001D6996 /* Sources */,
+				4AFC637414348457001D6996 /* Frameworks */,
+				4AFC637514348457001D6996 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Boost;
+			productName = Boost;
+			productReference = 4AFC637714348457001D6996 /* libBoost.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		8DD76FA90486AB0100D96B5E /* PVRFix */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB928508733DD80010E9CD /* Build configuration list for PBXNativeTarget "PVRFix" */;
@@ -138,6 +246,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4AFC638914348515001D6996 /* PBXTargetDependency */,
 			);
 			name = PVRFix;
 			productInstallPath = "$(HOME)/bin";
@@ -165,11 +274,63 @@
 			projectRoot = "";
 			targets = (
 				8DD76FA90486AB0100D96B5E /* PVRFix */,
+				4AFC637614348457001D6996 /* Boost */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4AFC637B14348491001D6996 /* Get Boost */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Get Boost";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -e\n\ncd \"$PROJECT_ROOT\"\n\nif [ ! -f \"boost_$XCODE_BOOST_VERSION.tar.bz2\" ]; then\n\tdotted_version=\"${XCODE_BOOST_VERSION//_/.}\"\n\tcurl -O \"http://waix.dl.sourceforge.net/project/boost/boost/$dotted_version/boost_$XCODE_BOOST_VERSION.tar.bz2\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4AFC637C143484B0001D6996 /* Extract Boost */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Extract Boost";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -e\n\ncd \"$PROJECT_DIR\"\n\nif [ ! -d \"boost_$XCODE_BOOST_VERSION\" ]; then\n\ttar jxf \"boost_$XCODE_BOOST_VERSION.tar.bz2\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		4AFC637314348457001D6996 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AFC637D14348500001D6996 /* cmdline.cpp in Sources */,
+				4AFC637E14348500001D6996 /* config_file.cpp in Sources */,
+				4AFC637F14348500001D6996 /* convert.cpp in Sources */,
+				4AFC638014348500001D6996 /* options_description.cpp in Sources */,
+				4AFC638114348500001D6996 /* parsers.cpp in Sources */,
+				4AFC638214348500001D6996 /* positional_options.cpp in Sources */,
+				4AFC638314348500001D6996 /* split.cpp in Sources */,
+				4AFC638414348500001D6996 /* utf8_codecvt_facet.cpp in Sources */,
+				4AFC638514348500001D6996 /* value_semantic.cpp in Sources */,
+				4AFC638614348500001D6996 /* variables_map.cpp in Sources */,
+				4AFC638714348500001D6996 /* winmain.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76FAB0486AB0100D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,17 +348,21 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4AFC638914348515001D6996 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AFC637614348457001D6996 /* Boost */;
+			targetProxy = 4AFC638814348515001D6996 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1DEB928608733DD80010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INSTALL_PATH = /usr/local/bin;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PchApp.h;
 				PRODUCT_NAME = PVRFix;
 			};
 			name = Debug;
@@ -205,10 +370,8 @@
 		1DEB928708733DD80010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
-				INSTALL_PATH = /usr/local/bin;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PchApp.h;
 				PRODUCT_NAME = PVRFix;
 			};
 			name = Release;
@@ -216,50 +379,49 @@
 		1DEB928A08733DD80010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				ENABLE_OPENMP_SUPPORT = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = PchApp.h;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(HOME)/include";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/lib";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/boost_$XCODE_BOOST_VERSION\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-lboost_program_options";
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx;
+				XCODE_BOOST_VERSION = 1_47_0;
 			};
 			name = Debug;
 		};
 		1DEB928B08733DD80010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				ENABLE_OPENMP_SUPPORT = YES;
-				GCC_ALTIVEC_EXTENSIONS = YES;
-				GCC_AUTO_VECTORIZATION = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = YES;
-				GCC_ENABLE_SSE3_EXTENSIONS = YES;
-				GCC_ENABLE_SSE41_EXTENSIONS = YES;
-				GCC_ENABLE_SSE42_EXTENSIONS = YES;
-				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = PchApp.h;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(HOME)/include";
-				LIBRARY_SEARCH_PATHS = "$(HOME)/lib";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_LDFLAGS = "-lboost_program_options";
-				SDKROOT = macosx10.5;
+				HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/boost_$XCODE_BOOST_VERSION\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+				XCODE_BOOST_VERSION = 1_47_0;
+			};
+			name = Release;
+		};
+		4AFC637914348457001D6996 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = Boost;
+			};
+			name = Debug;
+		};
+		4AFC637A14348457001D6996 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = Boost;
 			};
 			name = Release;
 		};
@@ -280,6 +442,15 @@
 			buildConfigurations = (
 				1DEB928A08733DD80010E9CD /* Debug */,
 				1DEB928B08733DD80010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AFC637814348457001D6996 /* Build configuration list for PBXNativeTarget "Boost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AFC637914348457001D6996 /* Debug */,
+				4AFC637A14348457001D6996 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

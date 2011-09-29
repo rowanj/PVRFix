@@ -7,3 +7,5 @@
 *.mode2v3
 *.swp
 *~.nib
+boost_*.tar.bz2
+boost_*/
